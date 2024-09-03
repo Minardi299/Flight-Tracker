@@ -1,0 +1,17 @@
+﻿@page "/user"
+
+<PageTitle>Input</PageTitle>
+<h1>this is the input fields</h1>
+<input @oninput=InputChanged />
+<input @onchange="InputChanged" />
+<p>this is :@message</p>
+
+@code {
+    string message = "";
+
+    void InputChanged(ChangeEventArgs e)
+    {
+        message = (string)e.Value;
+        StateHasChanged();
+    }
+}

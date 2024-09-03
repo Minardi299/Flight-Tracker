@@ -1,0 +1,25 @@
+﻿@using FlightTracker.ViewModel
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @vm.CurrentCount</p>
+<input type="number" @bind-value="vm.Amount" placeholder="Amount to increment" />
+
+
+<button class="btn btn-primary" @onclick="@(() => IncrementCount())">Click me</button>
+
+@code {
+    [Parameter] public int InitialCount { get; set; }
+    private CounterViewModel vm;
+    protected override void OnInitialized()
+    {
+        // Initialize the ViewModel with the InitialCount parameter
+        this.vm = new CounterViewModel(InitialCount);
+    }
+    private void IncrementCount()
+    {
+        this.vm.IncrementCount();
+        StateHasChanged();
+    }
+}
