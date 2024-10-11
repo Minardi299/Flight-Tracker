@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightTracker.Model;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -10,17 +11,18 @@ namespace FlightTracker.ViewModel
         private readonly string baseURL = "https://api.aviationstack.com/v1/flights";
         private readonly string accessKey  ;
         public string FlightId { get; set; }
-       
-        
+        public Flight? Flight { get; set; }  
         public FlightViewModel(string FlightId)
         {
-            
+           
             this.FlightId = FlightId;
             this.accessKey = Environment.GetEnvironmentVariable("AviationStackAPIKey");
             if (string.IsNullOrEmpty(accessKey))
             {
                 throw new InvalidOperationException("AviationStackAPIKey is not set in environment variables.");
             }
+            FlightManager m = new FlightManager();
+            this.Flight = m.GetFlightByNameMock(this.FlightId);
         }
         private string BuildApiUrl()
         {
