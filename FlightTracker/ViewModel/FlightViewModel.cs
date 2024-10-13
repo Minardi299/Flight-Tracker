@@ -12,6 +12,7 @@ namespace FlightTracker.ViewModel
         private readonly string accessKey  ;
         public string FlightId { get; set; }
         public Flight? Flight { get; set; }  
+        public FlightManager Manager { get; set; }
         public FlightViewModel(string FlightId)
         {
            
@@ -21,8 +22,8 @@ namespace FlightTracker.ViewModel
             {
                 throw new InvalidOperationException("AviationStackAPIKey is not set in environment variables.");
             }
-            FlightManager m = new FlightManager();
-            this.Flight = m.GetFlightByNameMock(this.FlightId);
+            this.Manager = new FlightManager();
+            
         }
         private string BuildApiUrl()
         {

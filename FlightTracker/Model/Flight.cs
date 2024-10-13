@@ -5,17 +5,16 @@ namespace FlightTracker.Model
 {
     public class Flight
     {
-        [JsonProperty("number")]
-        public string Number { get; set; }
+        [JsonProperty("flight")]
+        private JObject FlightData { get; set; }
+        [JsonIgnore]
+        public string Number => FlightData?["number"]?.ToString();
 
-        [JsonProperty("iata")]
-        public string Iata { get; set; }
+        public string Iata => FlightData?["iata"]?.ToString();
 
-        [JsonProperty("icao")]
-        public string Icao { get; set; }
+        public string Icao => FlightData?["icao"]?.ToString();
 
-        [JsonProperty("codeshared")]
-        public object CodeShared { get; set; }
+        public object CodeShared => FlightData?["codeshared"]?.ToString();
 
         [JsonProperty("departure")]
         public Airport Departure { get; set; }
@@ -37,5 +36,9 @@ namespace FlightTracker.Model
 
         [JsonProperty("flight_status")]
         public string Flight_status { get; set; }
+        public  override string ToString()
+        {
+            return $"{this.Number} is the flight number and airline is {this.Airline.Name}";
+        }
     }
 }

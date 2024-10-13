@@ -16,19 +16,19 @@ namespace FlightTracker.Model
 
             Console.WriteLine(data);
 
-            //if (data == null)
-            //{
-            //    throw new NullReferenceException("Deserialized response is null.");
-            //}
+            if (data == null)
+            {
+                throw new NullReferenceException("Deserialized response is null.");
+            }
 
-            //if (data.Data == null || data.Data.Count == 0)
-            //{
-            //    throw new NullReferenceException("Data array is null or empty.");
-            //}
+            if (data.Data == null || data.Data.Count == 0)
+            {
+                throw new NullReferenceException("Data array is null or empty.");
+            }
 
-            //Flight f = data.Data[0];
-            //return f;
-            return null; 
+            Flight f = data.Data[0];
+            return f;
+            
         }
     }
 }

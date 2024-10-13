@@ -2,7 +2,7 @@
 @using FlightTracker.ViewModel
 @using FlightTracker.Model
 <h3>Flight</h3>
-<input type="text" @bind="@vm.FlightId" placeholder="Enter Flight ID" />
+<input type="text" @bind="@flightId" placeholder="Enter Flight ID" />
 
 
 <button @onclick="GetFlightData">Get Flight Info</button>
@@ -17,14 +17,14 @@ else
 <p>@response</p>
 
 @code {
-    private string flightId = "PD673";
+    private string flightId = "AC761";
     // private TimeOnly? flightDate = "2024-08-09";
     private string response;
     private FlightViewModel vm;
-    public FlightManager Manager { get; set; }
+
     protected override void OnInitialized()
     {
-        this.Manager = new FlightManager();
+
         vm = new FlightViewModel(flightId);
         base.OnInitialized();
     }
@@ -33,11 +33,12 @@ else
     private async Task GetFlightData()
     {
         // Set flight ID and date
-        // vm.FlightId = flightId;
+        vm.FlightId = flightId;
         // vm.FlightDate = flightDate;
-// Call API to get flight data and update the response
+        // Call API to get flight data and update the response
         // response = await vm.GetApiData();
-        
+        response = vm.Manager.GetFlightByNameMock(flightId).ToString();
+
     }
     
 }
