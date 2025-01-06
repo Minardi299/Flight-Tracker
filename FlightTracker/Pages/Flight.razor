@@ -8,14 +8,15 @@
 <button @onclick="GetFlightData">Get Flight Info</button>
 @if (vm.Flight != null)
 {
-    
+    <p>this is flight @vm.Flight?.Number</p>
+    <p>the airline name is @vm.Flight?.Airline?.Name</p>
+    <p>the arrival airport is @vm.Flight?.Arrival?.Name</p>
 }
 else
 {
     <p>No flight data available.</p>
 }
-<p>this is flight @vm.Flight?.Number</p>
-<p>the arrival airport is @vm.Flight?.Arrival?.Name</p>
+
  
 @code {
     private string flightId = "AC761";
@@ -27,6 +28,7 @@ else
     {
 
         vm = new FlightViewModel(flightId);
+        vm.Flight = vm.Manager.GetFlightByNameMock(flightId);
         base.OnInitialized();
     }
 
@@ -38,7 +40,7 @@ else
         // vm.FlightDate = flightDate;
         // Call API to get flight data and update the response
         // response = await vm.GetApiData();
-        vm.Flight = vm.Manager.GetFlightByNameMock(flightId);
+        
 
     }
     
