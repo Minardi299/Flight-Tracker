@@ -8,14 +8,15 @@
 <button @onclick="GetFlightData">Get Flight Info</button>
 @if (vm.Flight != null)
 {
-    <p>@vm.Flight.Number</p>
+    
 }
 else
 {
     <p>No flight data available.</p>
 }
-<p>@response</p>
-
+<p>this is flight @vm.Flight?.Number</p>
+<p>the arrival airport is @vm.Flight?.Arrival?.Name</p>
+ 
 @code {
     private string flightId = "AC761";
     // private TimeOnly? flightDate = "2024-08-09";
@@ -37,7 +38,7 @@ else
         // vm.FlightDate = flightDate;
         // Call API to get flight data and update the response
         // response = await vm.GetApiData();
-        response = vm.Manager.GetFlightByNameMock(flightId).ToString();
+        vm.Flight = vm.Manager.GetFlightByNameMock(flightId);
 
     }
     
